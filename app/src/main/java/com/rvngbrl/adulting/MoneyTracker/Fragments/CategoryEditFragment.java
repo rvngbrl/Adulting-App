@@ -1,0 +1,203 @@
+package com.rvngbrl.adulting.MoneyTracker.Fragments;
+
+
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.rvngbrl.adulting.MoneyTracker.providers.ExpensesContract.Categories;
+import com.rvngbrl.adulting.MoneyTracker.providers.ExpensesContract.Expenses;
+import com.rvngbrl.adulting.R;
+
+import static android.content.Context.MODE_PRIVATE;
+
+public class CategoryEditFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    public static final String EXTRA_EDIT_CATEGORY = "com.rvngbrl.adulting.MoneyTracker.edit_category";
+
+    private EditText mCatNameEditText;
+    private long mExtraValue;
+    AdView mAdView;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_category_edit, container, false);
+
+        mCatNameEditText = (EditText) rootView.findViewById(R.id.category_name_edit_text);
+
+
+        MobileAds.initialize(getContext(), String.valueOf(R.string.AdID)); //input your id
+        mAdView=(AdView) rootView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        String StatPurchase = sharedPreferences.getString("purchaseStat", "");
+        if (StatPurchase.equals("Purchased")){
+            mAdView.setVisibility(View.GONE);
+        }
+
+
+
+        // Set listener on Done (submit) button on keyboard clicked
+        mCatNameEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    checkEditTextForEmptyField(mCatNameEditText);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mExtraValue = getActivity().getIntent().getLongExtra(EXTRA_EDIT_CATEGORY, -1);
+        // Create a new category
+        if (mExtraValue < 1) {
+            getActivity().setTitle(R.string.add_category);
+
+            // Edit existing category
+        } else {
+            getActivity().setTitle(R.string.edit_category);
+            setCategoryData();
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_category_edit, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.done_category_edit_menu_item:
+                if (checkEditTextForEmptyField(mCatNameEditText)) {
+                    // Create a new category
+                    if (mExtraValue < 1) {
+                        insertNewCategory();
+
+                        // Edit existing category
+                    } else {
+                        updateCategory(mExtraValue);
+                    }
+                    getActivity().finish();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private boolean checkEditTextForEmptyField(EditText editText) {
+        String inputText = editText.getText().toString().trim();
+        if (inputText.length() == 0) {
+            editText.setError(getResources().getString(R.string.error_empty_field));
+            mCatNameEditText.selectAll();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void setCategoryData() {
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public CursorLoader onCreateLoader(int id, Bundle args) {
+        String[] projectionFields = new String[] {
+                Categories._ID,
+                Categories.NAME
+        };
+
+        Uri singleCategoryUri = ContentUris.withAppendedId(Categories.CONTENT_URI, mExtraValue);
+
+        return new CursorLoader(getActivity(),
+                singleCategoryUri,
+                projectionFields,
+                null,
+                null,
+                null
+        );
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        int categoryNameIndex = data.getColumnIndex(Categories.NAME);
+        data.moveToFirst();
+        String categoryName = data.getString(categoryNameIndex);
+        mCatNameEditText.setText(categoryName);
+    }
+
+    @Override
+    public void onLoaderReset(Loader loader) {
+        mCatNameEditText.setText("");
+    }
+
+    private void insertNewCategory() {
+        ContentValues insertValues = new ContentValues();
+        insertValues.put(Categories.NAME, mCatNameEditText.getText().toString());
+
+        getActivity().getContentResolver().insert(
+                Categories.CONTENT_URI,
+                insertValues
+        );
+
+        Toast.makeText(getActivity(),
+                getResources().getString(R.string.category_added),
+                Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateCategory(long id) {
+        ContentValues updateValues = new ContentValues();
+        updateValues.put(Categories.NAME, mCatNameEditText.getText().toString());
+
+        Uri categoryUri = ContentUris.withAppendedId(Categories.CONTENT_URI, id);
+
+        getActivity().getContentResolver().update(
+                categoryUri,
+                updateValues,
+                null,
+                null
+        );
+
+        Toast.makeText(getActivity(),
+                getResources().getString(R.string.category_updated),
+                Toast.LENGTH_SHORT).show();
+    }
+}

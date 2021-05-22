@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="131dp"
+            android:layout_height="131dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="130dp"
+            app:srcCompat="@drawable/aboutlogo" />
+
+
+        <TextView
+            android:id="@+id/texttitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/baloo"
+            android:text="Adulting"
+            android:textColor="#03A9F4"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/texttitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/texttitle"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="Task and Money Manager"
+            android:textColor="#03A9F4"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/texttitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/texttitle2"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:text="Version 1.0.4"
+            android:textColor="#03A9F4"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/texttitle4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/texttitle3"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="© 2021 RvnGbrl.Apps"
+            android:textColor="#4ABEF3"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

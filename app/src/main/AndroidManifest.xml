@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rvngbrl.adulting">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <meta-data
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:screenOrientation="portrait"
+        android:value="ca-app-pub-3635333593171699~3643069605" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Adulting">
+        <activity
+            android:name=".purchase"
+            android:label="Purchase"></activity>
+        <activity
+            android:name=".About"
+            android:label="@string/title_activity_about"
+            android:theme="@style/Theme.Adulting.NoActionBar" />
+        <activity
+            android:name=".MoneyTracker.Activities.SetBudget"
+            android:theme="@style/AppDialogTheme" />
+        <activity
+            android:name=".MoneyTracker.Activities.SelectCurrency"
+            android:label="Currency"
+            android:theme="@style/AppDialogTheme" />
+        <activity android:name=".Money" />
+        <activity android:name=".ToDo" />
+        <activity
+            android:name=".TaskTracker.ModifyTask"
+            android:theme="@style/Theme.Adulting.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Adulting.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MoneyTracker.Activities.SettingsActivity"
+            android:parentActivityName=".Money"
+            android:screenOrientation="portrait">
+
+            <!-- Parent activity meta-data to support Android 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Money" />
+        </activity>
+        <activity
+            android:name=".MoneyTracker.Activities.CategoryEditActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible">
+
+            <!-- Parent activity meta-data to support Android 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".MoneyTracker.Activities.ExpenseEditActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible">
+
+            <!-- Parent activity meta-data to support Android 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:name=".MoneyTracker.providers.ExpensesProvider"
+            android:authorities="com.rvngbrl.adulting.MoneyTracker.providers" />
+
+        <receiver android:name=".ReminderBroadcast" />
+    </application>
+
+</manifest>

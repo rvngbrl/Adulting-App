@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bg_layout"
+    android:background="@drawable/gradient_list">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:clipToPadding="false"
+        android:isScrollContainer="false"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/todayContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Today's Tasks"
+                    android:textColor="#F8F7F7"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
+
+                <com.rvngbrl.adulting.TaskTracker.NoScrollList
+                    android:id="@+id/taskListToday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="#30CCCCCC"
+                    android:dividerHeight="1dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/tomorrowContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Tomorrow's Tasks"
+                    android:textColor="#FDFBFB"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
+
+                <com.rvngbrl.adulting.TaskTracker.NoScrollList
+                    android:id="@+id/taskListTomorrow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="#30CCCCCC"
+                    android:dividerHeight="1dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/otherContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Upcoming Tasks"
+                    android:textColor="#FBF8F8"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
+
+                <com.rvngbrl.adulting.TaskTracker.NoScrollList
+                    android:id="@+id/taskListUpcoming"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="#30CCCCCC"
+                    android:dividerHeight="1dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/emptyTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hey"
+            android:textColor="#EC5D5D"
+            android:textSize="38dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="you are\nfree today"
+            android:textColor="#323872"
+            android:textSize="34dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="You have no task to do today"
+            android:textColor="#CDD1D5"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/radius_button"
+            android:onClick="openModifyTask"
+            android:paddingHorizontal="70dp"
+            android:paddingVertical="15dp"
+            android:text="Add New Task"
+     />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+android:layout_marginBottom="70dp"
+     android:layout_marginRight="20dp"
+
+        android:contentDescription="Add Task"
+        android:onClick="openModifyTask"
+        android:paddingBottom="50dp"
+        android:src="@drawable/ic_add" />
+
+
+    <include layout="@layout/content_ads" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

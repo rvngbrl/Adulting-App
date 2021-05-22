@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_purchase"
+            android:icon="@drawable/ic_purchase"
+            android:title="Purchase this App" />
+        <item
+            android:id="@+id/nav_friend"
+            android:icon="@drawable/ic_friends"
+            android:title="Tell a Friend" />
+
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info"
+            android:title="About" />
+    </group>
+    <group android:checkableBehavior="single">
+
+        <item
+            android:title="Settings">
+            <menu>
+
+                <item
+                    android:id="@+id/nav_changeName"
+                    android:icon="@drawable/ic_name"
+                    android:title="Change Your Name" />
+
+
+                <item
+                    android:id="@+id/nav_changeCurrency"
+                    android:icon="@drawable/ic_currency"
+                    android:title="Change Your Currency" />
+
+
+                <item
+                    android:id="@+id/nav_changeBudget"
+                    android:icon="@drawable/ic_budget"
+                    android:title="Change Your Budget" />
+            </menu>
+
+        </item>
+    </group>
+
+</menu>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+        <TextView
+            android:id="@+id/texttitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="130dp"
+            android:fontFamily="@font/baloo"
+            android:text="Perks of Purchasing this Application"
+            android:textColor="#03A9F4"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/texttitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/texttitle"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="Remove Ads"
+            android:textColor="#03A9F4"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/texttitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/texttitle2"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="Set Your Budget"
+            android:textColor="#03A9F4"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/texttitle4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/texttitle3"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="Support the Developer"
+            android:textColor="#4ABEF3"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/purchaseStat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/texttitle4"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="Not Purchase"
+            android:visibility="invisible"
+            android:textColor="#4ABEF3"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnPurchase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/texttitle4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="53dp"
+            android:onClick="purchase"
+            android:gravity="center"
+            android:text="Purchase this Product"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
